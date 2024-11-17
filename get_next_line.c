@@ -95,6 +95,8 @@ char	*get_next_line(int fd)
 	static char	*data;
 	char		*line;
 
+	if (read(fd, NULL, 0) < 0)
+		return (NULL);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	data = ft_read_from_file(fd, data);
@@ -109,37 +111,3 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
-
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*s;
-
-// 	fd = open("test.txt", O_RDONLY);
-// 	if (fd < 0)
-// 	{
-// 		perror("Error opening file");
-// 		return (1);
-// 	}
-// 	while ((s = get_next_line(fd)) != NULL)
-// 	{
-// 		printf("%s", s);
-// 		free(s);
-// 	}
-// 	close(fd);
-// 	return (0);
-// }
-
-// int main(void)
-// {
-//     char *line;
-
-//     // Use file descriptor 0 (stdin)
-//     printf("Enter text (Ctrl+D to end):\n");
-//     while ((line = get_next_line(0)) != NULL)  // Read from stdin
-//     {
-//         printf("%s", line);  // Print the line read from stdin
-//         free(line);  // Free the dynamically allocated line
-//     }
-//     return (0);
-// }
