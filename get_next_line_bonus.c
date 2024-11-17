@@ -95,10 +95,15 @@ char	*get_next_line(int fd)
 	static char	*data[MAX_FD];
 	char		*line;
 
-	if (read(fd, NULL, 0) < 0 || fd >= MAX_FD)
-		return (NULL);``
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	{
+		if (data[fd])
+		{
+			free(data[fd]);
+			data[fd] = NULL;
+		}
 		return (NULL);
+	}
 	data[fd] = ft_read_from_file(fd, data[fd]);
 	if (!data[fd])
 		return (NULL);
