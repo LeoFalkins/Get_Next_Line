@@ -95,7 +95,7 @@ char	*get_next_line(int fd)
 	static char	*data[MAX_FD];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		if (data[fd])
 		{
